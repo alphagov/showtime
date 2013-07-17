@@ -6,7 +6,8 @@ Webdriver + osxautomation / xaut mashup
 
 ### OS X
 
- - Install osxautomation: ```bash
+ - Install osxautomation:
+```sh
 git clone https://github.com/joseph/osxautomation
 cd osxautomation
 scripts/buildrun
@@ -24,8 +25,9 @@ sudo cp build/Release/osxautomation /usr/local/bin
  - `sudo gem install watir-webdriver`
  - Install xaut:
    - Download xaut from http://sourceforge.net/projects/xautomation/
-   - Extract it
-   - ```bash
+   - Extract it:
+   
+```sh
 cd <xaut_directory>
 ./configure
 make
