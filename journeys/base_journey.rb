@@ -7,15 +7,20 @@ class BaseJourney
     @offsetY = offset[:y]
   end
 
-  def moveMouse (x, y)
+  def getScrollPos
     res = @browser.execute_script <<-JS
       return {
         scrollTop: $(window).scrollTop(),
         scrollLeft: $(window).scrollLeft(),
       }
     JS
-    x += @offsetX - res['scrollLeft'].to_i
-    y += @offsetY - res['scrollTop'].to_i
+    return [res['scrollLeft'].to_i, res['scrollTop'].to_i]
+  end
+
+  def moveMouse (x, y)
+    pos = getScrollPos
+    x += @offsetX - pos[0]
+    y += @offsetY - pos[1]
     @automator.mouse_move(x, y)
   end
 
@@ -72,10 +77,49 @@ class BaseJourney
     moveMouse(pos[0], pos[1])
 
     if options[:click]
-      sleep 1
+      sleep 0.5
+      showClick(pos[0], pos[1])
       el.click
     end
   end
+
+  def showClick(x, y)
+    pos = getScrollPos
+    x -= pos[0]
+    y -= pos[1]
+
+    size = 100.0
+    @browser.execute_script <<-JS
+      (function () {
+        var circle = $('<div>').html('&nbsp');
+        circle.css({
+          'box-sizing': 'border-box',
+          'border-radius': '50%',
+          width: '0px',
+          height: '0px',
+          border: '2px red solid',
+          background: 'rgba(255,0,0, 0.6)',
+          position: 'fixed',
+          opacity: 1,
+          top: #{y},
+          left: #{x},
+          'z-index': 10000
+        });
+        circle.appendTo('body');
+        circle.animate({
+          width: '#{size}px',
+          height: '#{size}px',
+          'margin-left': '-#{size / 2.0}px',
+          'margin-top': '-#{size / 2.0}px',
+          opacity: 0
+        }, 500, function () {
+          circle.remove();
+        });
+      })()
+    JS
+    sleep 0.6
+  end
+
 
   def message(text, options)
     duration = options[:duration]
