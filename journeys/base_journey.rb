@@ -1,4 +1,5 @@
 class BaseJourney
+
   def initialize (browser, automator, offset)
     @browser = browser
     @automator = automator
@@ -63,11 +64,58 @@ class BaseJourney
     scrollToEl(el, options)
     lefttop = el.wd.location
     size = el.wd.size
-    centre = [lefttop[0] + size[0] / 2, lefttop[1] + size[1] / 2]
-    moveMouse(centre[0], centre[1])
+    horizontal = options[:horizontal]
+    horizontal ||= 0.8
+    vertical = options[:vertical]
+    vertical ||= 0.8
+    pos = [lefttop[0] + size[0] * horizontal, lefttop[1] + size[1] * vertical]
+    moveMouse(pos[0], pos[1])
 
     if options[:click]
+      sleep 1
       el.click
     end
+  end
+
+  def message(text, options)
+    duration = options[:duration]
+    duration ||= 6000
+    fadeIn = options[:fadeIn]
+    fadeIn ||= 800
+    fadeOut = options[:fadeOut]
+    fadeOut ||= 800
+    @browser.execute_script <<-JS
+      (function () {
+        var message = $('<div>').html('#{text}');
+        message.css({
+          'box-sizing': 'border-box',
+          padding: '3% 4% 2%',
+          position: 'fixed',
+          width: '94%',
+          left: '3%',
+          bottom: '3%',
+          display: 'block',
+          'font-size': '70px',
+          background: 'rgba(0,0,0,0.8)',
+          margin: 0,
+          color: 'white',
+          'z-index': '10000',
+          'line-height': '100%',
+          'box-shadow': '5px 5px 17px rgba(0,0,0,.5)',
+          'border-radius': '30px'
+        });
+        message.appendTo('body').hide();
+        message.fadeIn(800, function () {
+          setTimeout(function () {
+            message.fadeOut(800, function () {
+              message.remove();
+            });
+          }, #{duration});
+        });
+      })()
+    JS
+
+    sleep (duration + fadeIn + fadeOut) / 1000
+
   end
 end
