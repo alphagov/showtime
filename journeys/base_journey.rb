@@ -65,8 +65,7 @@ class BaseJourney
     end
   end
 
-  def moveToEl(el, options = {})
-    scrollToEl(el, options)
+  def getPositionOnEl(el, options = {})
     lefttop = el.wd.location
     size = el.wd.size
     horizontal = options[:horizontal]
@@ -74,6 +73,11 @@ class BaseJourney
     vertical = options[:vertical]
     vertical ||= 0.8
     pos = [lefttop[0] + size[0] * horizontal, lefttop[1] + size[1] * vertical]
+  end
+
+  def moveToEl(el, options = {})
+    scrollToEl(el, options)
+    pos = getPositionOnEl(el, options)
     moveMouse(pos[0], pos[1])
 
     if options[:click]
@@ -120,8 +124,7 @@ class BaseJourney
     sleep 0.6
   end
 
-
-  def message(text, options)
+  def message(text, options = {})
     duration = options[:duration]
     duration ||= 6000
     fadeIn = options[:fadeIn]
