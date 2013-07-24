@@ -81,7 +81,7 @@ Dir["journeys/*.rb"].each {|file| require file }
 
 journeys = [
   LicensingJourney.new(@browser, @automator, @offsets),
-  TransactionsExplorerJourney.new(@browser, @automator, @offsets)
+  TransactionsExplorerJourney.new(@browser, @automator, @offsets),
   PayLegalisationPostJourney.new(@browser, @automator, @offsets)
 ]
 
