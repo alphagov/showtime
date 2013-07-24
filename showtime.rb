@@ -1,5 +1,11 @@
 require 'rubygems'
 require 'watir-webdriver'
+require 'trollop'
+
+opts = Trollop::options do
+  opt :pos, "Browser window position <x,y>", :type => :string
+  opt :size, "Browser window size <x,y>", :type => :string
+end
 
 # check if osxautomation or xaut is installed
 `osxautomation`
@@ -19,6 +25,25 @@ end
 
 @browser = Watir::Browser.new :chrome
 @browser.driver.manage.timeouts.implicit_wait = 10
+
+if opts[:pos]
+  begin
+    pos = opts[:pos].split(',')
+    @browser.driver.manage.window.move_to(pos[0].to_i, pos[1].to_i)
+  rescue Exception => e
+    puts "Invalid position string #{opts[:pos]}"
+  end
+end
+
+if opts[:size]
+  begin
+    size = opts[:size].split(',')
+    @browser.driver.manage.window.resize_to(size[0].to_i, size[1].to_i)
+  rescue Exception => e
+    puts "Invalid size string #{opts[:size]}"
+  end
+end
+
 
 
 # calibrate
