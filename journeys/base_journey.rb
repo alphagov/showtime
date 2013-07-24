@@ -68,10 +68,8 @@ class BaseJourney
   def getPositionOnEl(el, options = {})
     lefttop = el.wd.location
     size = el.wd.size
-    horizontal = options[:horizontal]
-    horizontal ||= 0.8
-    vertical = options[:vertical]
-    vertical ||= 0.8
+    horizontal = options[:horizontal] || 0.8
+    vertical = options[:vertical] || 0.7
     pos = [lefttop[0] + size[0] * horizontal, lefttop[1] + size[1] * vertical]
   end
 

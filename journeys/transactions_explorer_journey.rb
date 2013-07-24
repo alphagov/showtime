@@ -5,7 +5,7 @@ class TransactionsExplorerJourney < BaseJourney
     sleep 5
 
     moveToEl(@browser.link(:text => 'Transactions Explorer'), { :click => true })
-    sleep 4
+    sleep 10
 
     moveToEl(@browser.link(:text => 'Services'), { :click => true })
     sleep 4
@@ -32,7 +32,9 @@ class TransactionsExplorerJourney < BaseJourney
     moveToEl(@browser.element(:text => 'High-volume services'), { :click => true })
     sleep 10
 
-    moveToEl(@browser.element(:text => 'Stamp Duty Reserve Tax (SDRT)'), { :click => true })
+    moveToEl(@browser.element(:text => 'Stamp Duty Reserve Tax (SDRT)'), {
+      :horizontal => 0.2, :click => true
+    })
     sleep 10
 
     @browser.goto 'gov.uk/performance'

@@ -9,7 +9,7 @@ class LicensingJourney < BaseJourney
     sleep 4
 
     moveToEl(@browser.link(:text => 'Licensing'), { :click => true })
-    sleep 4
+    sleep 10
 
     d = @browser.element(:class => "stack0")
     moveToEl(d, { :vertical => 0.5, :horizontal => 1.0 })
