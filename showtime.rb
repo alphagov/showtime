@@ -86,10 +86,13 @@ journeys = [
 
 
 
-
 while true
   journeys.each do |journey|
-    journey.run
+    begin
+      journey.run
+    rescue Watir::Exception::UnknownObjectException => e
+      # run failed, start next journey
+    end
   end
 end
 
