@@ -152,9 +152,9 @@ class BaseJourney
           'border-radius': '30px'
         });
         message.appendTo('body').hide();
-        message.fadeIn(800, function () {
+        message.fadeIn(#{fadeIn}, function () {
           setTimeout(function () {
-            message.fadeOut(800, function () {
+            message.fadeOut(#{fadeOut}, function () {
               message.remove();
             });
           }, #{duration});
