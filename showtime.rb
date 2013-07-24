@@ -55,7 +55,7 @@ posGlobal = @automator.mouse_location
 Dir["journeys/*.rb"].each {|file| require file }
 
 journeys = [
-  LicensingJourney.new(@browser, @automator, @offsets)
+  LicensingJourney.new(@browser, @automator, @offsets),
   TransactionsExplorerJourney.new(@browser, @automator, @offsets)
 ]
 
