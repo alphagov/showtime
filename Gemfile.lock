@@ -20,5 +20,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  trollop
-  watir-webdriver
+  trollop (= 2.0)
+  watir-webdriver (= 0.6.4)
