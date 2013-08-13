@@ -44,8 +44,6 @@ if opts[:size]
   end
 end
 
-
-
 # calibrate
 
 @browser.execute_script <<-JS
@@ -57,6 +55,27 @@ end
     document.write('<br>Go!');
   }
 JS
+
+# auto-calibrate when possible
+if opts[:pos] and opts[:size]
+  begin
+    size = opts[:size].split(',')
+    pos = opts[:pos].split(',')
+    centre_x = pos[0].to_i + size[0].to_i / 2.0
+    centre_y = pos[1].to_i + size[1].to_i / 2.0
+    @automator.mouse_move(centre_x, centre_y)
+
+    (1..5).each do
+      sleep 0.5
+      @automator.mouse_click
+    end
+  rescue Exception => e
+    puts "Invalid position or size string"
+  end
+end
+
+
+
 
 activated = false
 while !activated
