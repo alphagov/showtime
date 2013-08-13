@@ -110,10 +110,11 @@ while true
   journeys.each do |journey|
     begin
       journey.run
-    rescue Watir::Exception::UnknownObjectException => e
-      # run failed, start next journey
+    rescue
+      @browser.quit
+      throw "Journey failed"
     end
   end
 end
 
-@browser.quit
+
