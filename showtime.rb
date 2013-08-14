@@ -108,12 +108,7 @@ journeys = [
 
 while true
   journeys.each do |journey|
-    begin
-      journey.run
-    rescue
-      @browser.quit
-      throw "Journey failed"
-    end
+    journey.run
   end
 end
 
