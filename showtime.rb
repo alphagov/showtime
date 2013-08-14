@@ -106,10 +106,14 @@ journeys = [
 
 
 
-while true
-  journeys.each do |journey|
-    journey.run
+begin
+  while true
+    journeys.each do |journey|
+      journey.run
+    end
   end
+ensure
+  @browser.quit
 end
 
 
