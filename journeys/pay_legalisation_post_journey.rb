@@ -22,7 +22,7 @@ class PayLegalisationPostJourney < BaseJourney
     moveToEl(d, { :vertical => 0.5, :horizontal =>  1.0 })
     sleep 10
 
-    scrollToEl(@browser.element(:id => "uptime"))
+    scrollToEl(@browser.element(:class => "uptime"))
     sleep 10
 
     moveToEl(@browser.link(:text => 'Performance Platform Alpha'), { :click => true })
