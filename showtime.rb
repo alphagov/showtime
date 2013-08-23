@@ -58,32 +58,40 @@ JS
 
 # auto-calibrate when possible
 if opts[:pos] and opts[:size]
-  begin
-    size = opts[:size].split(',')
-    pos = opts[:pos].split(',')
-    centre_x = pos[0].to_i + size[0].to_i / 2.0
-    centre_y = pos[1].to_i + size[1].to_i / 2.0
-    @automator.mouse_move(centre_x, centre_y)
+  activated = false
+  size = opts[:size].split(',')
+  pos = opts[:pos].split(',')
+  centre_x = pos[0].to_i + size[0].to_i / 2.0
+  centre_y = pos[1].to_i + size[1].to_i / 2.0
+  @automator.mouse_move(centre_x, centre_y)
 
-    (1..5).each do
-      sleep 0.5
-      @automator.mouse_click
+  (1..15).each do
+    sleep 0.5
+    @automator.mouse_click
+    activated = @browser.execute_script <<-JS
+      return window.activated === true;
+    JS
+    if activated:
+      break
     end
-  rescue Exception => e
-    puts "Invalid position or size string"
+  end
+  if not activated:
+    @browser.quit
+    throw "Could not calibrate"
+  end
+else
+  activated = false
+  while !activated
+    activated = @browser.execute_script <<-JS
+      return window.activated === true;
+    JS
+    sleep 0.3
   end
 end
 
 
 
 
-activated = false
-while !activated
-  activated = @browser.execute_script <<-JS
-    return window.activated === true;
-  JS
-  sleep 0.1
-end
 
 
 posBrowser = @browser.execute_script <<-JS
