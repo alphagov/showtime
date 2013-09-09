@@ -1,3 +1,3 @@
 require "showtime/version"
-require "showtime/base"
+require "showtime/journey"
 

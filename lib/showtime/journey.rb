@@ -127,12 +127,13 @@ module Showtime
     def moveToEl(el, options = {})
       scrollToEl(el, options)
       lefttop = el.wd.location
+      options[:horizontal_percent] ||= 0.5
       size = el.wd.size
-      centre = [lefttop[0] + size[0] / 2, lefttop[1] + size[1] / 2]
+      centre = [lefttop[0] + size[0] * options[:horizontal_percent], lefttop[1] + size[1] / 2]
       moveMouse(centre[0], centre[1])
 
       if options[:click]
-        el.click
+        click
       end
     end
 
@@ -140,6 +141,9 @@ module Showtime
       @automator.type(string)
     end
 
+    def click
+      @automator.click
+    end
 
     def scroll_to(selector)
       el = @browser.element :css => selector
@@ -149,20 +153,20 @@ module Showtime
     def click_link(text)
       el = @browser.link :text => text
       moveToEl(el)
-      el.click
+      click
     end
 
     def click_labels_input(input_name)
       el = @browser.label(:for => input_name).input
       moveToEl(el)
-      el.click
+      click
     end
 
     def enter_into_input(input_name, text)
       el = @browser.input :name => input_name
-      moveToEl(el)
+      moveToEl(el, :horizontal_percent => 0.2)
       sleep 0.5
-      el.click
+      click
       sleep 0.5
       type(text)
     end
@@ -178,7 +182,7 @@ module Showtime
       el = @browser.input :type => 'submit'
       moveToEl(el)
       sleep 0.5
-      el.click
+      click
     end
   end
 
@@ -201,6 +205,10 @@ module Showtime
 
     def mouse_move (x, y)
       system( "#{bin_path} \"mousemove #{x.round} #{y.round}\" > /dev/null" )
+    end
+
+    def click
+      system( "#{bin_path} \"mouseclick 1\" > /dev/null" )
     end
 
     def type (text)
