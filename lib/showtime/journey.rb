@@ -164,7 +164,7 @@ module Showtime
 
     def enter_into_input(input_name, text)
       el = @browser.input :name => input_name
-      moveToEl(el, :horizontal_percent => 0.2)
+      moveToEl(el, :horizontal_percent => 0.1)
       sleep 0.5
       click
       sleep 0.5
