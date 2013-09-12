@@ -4,6 +4,20 @@ module Showtime
   class Journey
 
     def initialize(options={ :size => '960,600', :position => '0,0' }, &block)
+      start_browser(options)
+      begin
+        while true
+          instance_eval &block
+        end
+      rescue Watir::Exception::UnknownObjectException, Timeout::Error => e
+        puts e.message
+        retry
+      ensure
+        @browser.quit
+      end
+    end
+
+    def start_browser(options)
       if (Object::RUBY_PLATFORM =~ /darwin/i)
         @automator = OsxAutomator.new
       else
@@ -26,19 +40,6 @@ module Showtime
         puts "Invalid size string"
       end
 
-      calibrate
-
-      begin
-        while true
-          instance_eval &block
-        end
-      ensure
-        @browser.quit
-      end
-    end
-
-
-    def calibrate
       @browser.execute_script <<-JS
         document.write('Showtime! Click into window to begin.');
         document.onclick = function(e){
