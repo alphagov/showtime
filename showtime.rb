@@ -13,7 +13,7 @@ osxautomation_installed = $?.success?
 `python check_xaut.py`
 xaut_installed = $?.success?
 
-Dir["automators/*.rb"].each {|file| require file }
+Dir["./automators/*.rb"].each {|file| require file }
 if osxautomation_installed
   @automator = OsxautomationAutomator.new
 elsif xaut_installed
@@ -71,11 +71,11 @@ if opts[:pos] and opts[:size]
     activated = @browser.execute_script <<-JS
       return window.activated === true;
     JS
-    if activated:
+    if activated
       break
     end
   end
-  if not activated:
+  if not activated
     @browser.quit
     throw "Could not calibrate"
   end
@@ -104,7 +104,7 @@ posGlobal = @automator.mouse_location
 }
 
 
-Dir["journeys/*.rb"].each {|file| require file }
+Dir["./journeys/*.rb"].each {|file| require file }
 
 journeys = [
   LicensingJourney.new(@browser, @automator, @offsets),
