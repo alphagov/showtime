@@ -1,8 +1,16 @@
 # Showtime
 
-Webdriver + osxautomation / xaut mashup
+Showtime uses Selenium WebDriver with `osxautomation` (Mac OS X) or `xaut`
+(Linux) to show a journey through a website. It's fantastic for showing a tour
+of your site on a big monitor.
 
-## Installation and usage
+<img src="http://i.imgur.com/oyRLEgn.gif" style="width: 420px;" alt="A tour of www.gov.uk/performance" />
+
+## Installation
+
+For all platforms you need to
+[download ChromeDriver](https://code.google.com/p/chromedriver/downloads/list)
+and make sure it's on your PATH.
 
 ### OS X
 
@@ -17,18 +25,12 @@ sudo cp build/Release/osxautomation /usr/local/bin
 
  - `bundle install`
  
- - Download chromedriver
-
 ### Ubuntu
+
  - Install Chromium, easiest from the Ubuntu Software Center
- - Install Chromedriver:
-   - Download from https://code.google.com/p/chromedriver/downloads/list
-   - Unzip and put chromedriver into PATH
  - Ensure rubygems is up-to-date: `sudo apt-get install rubygems`
- - `sudo gem install watir-webdriver`
- - Install xaut:
-   - Download xaut from http://sourceforge.net/projects/xautomation/
-   - Extract it:
+ - `bundle install`
+ - [Download xaut](http://sourceforge.net/projects/xautomation/) and extract it:
    
 ```sh
 cd <xaut_directory>
@@ -38,5 +40,7 @@ cd python
 sudo python setup.py install
 ```
 
-### Running journeys
-- `ruby showtime.rb`
+## Running journeys
+
+Run the journeys with `ruby showtime.rb`. Chrome will launch and prompt you to
+start the journey.
