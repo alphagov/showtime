@@ -8,14 +8,17 @@ Webdriver + osxautomation / xaut mashup
 
  - Install osxautomation:
 ```sh
-git clone https://github.com/joseph/osxautomation
+git clone https://github.com/abersager/osxautomation
 cd osxautomation
+git submodule update --init
 scripts/buildrun
 sudo cp build/Release/osxautomation /usr/local/bin
 ```
 
- - `sudo gem install watir-webdriver`
+ - `bundle install`
  
+ - Download chromedriver
+
 ### Ubuntu
  - Install Chromium, easiest from the Ubuntu Software Center
  - Install Chromedriver:
