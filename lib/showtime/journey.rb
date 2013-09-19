@@ -172,11 +172,27 @@ module Showtime
       type(text)
     end
 
+    def enter_into_textarea(input_name, text)
+      el = @browser.textarea :name => input_name
+      moveToEl(el, :horizontal_percent => 0.1)
+      sleep 0.5
+      click
+      sleep 0.5
+      type(text)
+    end
+
     def select_dropdown(input_name, option)
       el = @browser.select_list :name => input_name
       moveToEl(el)
       sleep 0.5
       el.select option
+    end
+
+    def upload_file(input_name, file_path)
+      el = @browser.file_input :name => input_name
+      moveToEl(el)
+      sleep 0.5
+      el.set file_path
     end
 
     def submit_form
