@@ -5,11 +5,16 @@ require 'trollop'
 opts = Trollop::options do
   opt :pos, "Browser window position <x,y>", :type => :string
   opt :size, "Browser window size <x,y>", :type => :string
+  opt :browser, "Browser type", :type => :string, :default => 'chrome'
 end
 
 # check if osxautomation or xaut is installed
-`osxautomation`
-osxautomation_installed = $?.success?
+osxautomation_installed = false
+begin
+  `osxautomation`
+  osxautomation_installed = true
+rescue
+end
 `python check_xaut.py`
 xaut_installed = $?.success?
 
@@ -23,7 +28,7 @@ else
 end
 
 
-@browser = Watir::Browser.new :chrome
+@browser = Watir::Browser.new opts[:browser].to_s
 @browser.driver.manage.timeouts.implicit_wait = 10
 
 if opts[:pos]
@@ -46,15 +51,8 @@ end
 
 # calibrate
 
-@browser.execute_script <<-JS
-  document.write('Showtime! Click into window to begin.');
-  document.onclick = function(e){
-    window.activated = true;
-    window.cursorX = e.pageX;
-    window.cursorY = e.pageY;
-    document.write('<br>Go!');
-  }
-JS
+url = "file://#{File.expand_path(File.dirname(__FILE__))}/calibrate.html"
+@browser.goto url
 
 # auto-calibrate when possible
 if opts[:pos] and opts[:size]
@@ -103,9 +101,7 @@ posGlobal = @automator.mouse_location
   :y => posGlobal[1].to_i - posBrowser[1].to_i
 }
 
-
 Dir["./journeys/*.rb"].each {|file| require file }
-
 journeys = [
   LicensingJourney.new(@browser, @automator, @offsets),
   TransactionsExplorerJourney.new(@browser, @automator, @offsets),
