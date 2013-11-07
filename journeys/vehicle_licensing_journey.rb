@@ -13,7 +13,7 @@ class VehicleLicensingJourney < BaseJourney
     moveToEl(@browser.link(:text => 'SORN'), { :click => true })
     sleep 8
 
-    scrollToEl(@browser.element(:text => 'Error codes (web)'))
+    scrollToEl(@browser.element(:id => 'sorn-failures'))
     sleep 7
 
     moveToEl(@browser.link(:id => 'proposition-name'), { :click => true })

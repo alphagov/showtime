@@ -10,7 +10,7 @@ class PayLegalisationPostJourney < BaseJourney
 
     moveToEl(@browser.link(:text => 'Pay to get documents legalised by post'), { :click => true })
     sleep 10
-    scrollToEl(@browser.element(:class => 'volumetrics'))
+    scrollToEl(@browser.element(:id => 'volumetrics-submissions'))
     moveToEl(@browser.element(:id => 'volumetrics-submissions-selected'))
     sleep 5
 
