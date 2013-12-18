@@ -5,7 +5,7 @@ class PayLegalisationPostJourney < BaseJourney
     @browser.goto 'gov.uk/performance'
     sleep 5
 
-    moveToEl(@browser.link(:text => 'Services'), { :click => true })
+    moveToEl(@browser.link(:text => 'detailed dashboards'), { :click => true })
     sleep 4
 
     moveToEl(@browser.link(:text => 'Pay to get documents legalised by post'), { :click => true })
