@@ -107,6 +107,7 @@ journeys = [
   TransactionsExplorerJourney.new(@browser, @automator, @offsets),
   PayLegalisationPostJourney.new(@browser, @automator, @offsets),
   VehicleLicensingJourney.new(@browser, @automator, @offsets),
+  HousingJourney.new(@browser, @automator, @offsets),
 ]
 
 
