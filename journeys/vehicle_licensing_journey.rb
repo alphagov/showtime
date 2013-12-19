@@ -4,9 +4,6 @@ class VehicleLicensingJourney < BaseJourney
     @browser.goto 'gov.uk/performance'
     sleep 5
 
-    moveToEl(@browser.link(:text => 'Services'), { :click => true })
-    sleep 4
-
     moveToEl(@browser.link(:text => 'Vehicle licensing'), { :click => true })
     sleep 8
 

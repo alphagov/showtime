@@ -7,7 +7,7 @@ class TransactionsExplorerJourney < BaseJourney
     moveToEl(@browser.link(:text => 'Transactions Explorer'), { :click => true })
     sleep 5
 
-    moveToEl(@browser.link(:text => 'High-volume services'), { :click => true })
+    moveToEl(@browser.link(:text => 'high-volume services'), { :click => true })
     sleep 8
 
     moveToEl(@browser.link(:text => 'Pay As You Earn (PAYE)'), { :click => true })
@@ -16,7 +16,7 @@ class TransactionsExplorerJourney < BaseJourney
     scrollToEl(@browser.element(:text => 'Cost per transaction'))
     sleep 4
 
-    moveToEl(@browser.link(:text => 'All services'), { :click => true })
+    moveToEl(@browser.link(:text => 'Transactions Explorer'), { :click => true })
     sleep 6
 
     moveToEl(@browser.link(:id => 'proposition-name'), { :click => true })
