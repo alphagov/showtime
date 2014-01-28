@@ -6,8 +6,6 @@ class HousingJourney < BaseJourney
 
     scrollToEl(@browser.element(:id => 'regional_hpi'))
     sleep 5
-
-    moveToEl(@browser.link(:id => 'proposition-name'), { :click => true })
   end
 
 end
