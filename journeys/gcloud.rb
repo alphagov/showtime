@@ -7,14 +7,15 @@ class GCloudJourney < BaseJourney
     moveToEl(@browser.link(:text => 'G-Cloud'), { :click => true })
     sleep 10
 
-    sections = ['monthly-procurement-by-company-size',
-                'proportion-of-procurement-from-small-and-medium-enterprises',
+    sections = ['cumulative-sales-by-company-size',
+                'monthly-sales-by-company-size',
+                'proportion-of-sales-from-small-and-medium-enterprises',
                 'cumulative-spend-by-customer-type',
                 'monthly-spend-by-lot']
 
     sections.each do |id|
       scrollToEl(@browser.element(:id => id))
-      sleep 5
+      sleep 4
     end
   end
 
