@@ -1,7 +1,7 @@
 class LicensingJourney < BaseJourney
 
   def run()
-    @browser.goto 'gov.uk/performance'
+    @browser.goto 'www.gov.uk/performance'
     sleep 5
 
     moveToEl(@browser.link(:text => 'Licensing'), { :click => true })

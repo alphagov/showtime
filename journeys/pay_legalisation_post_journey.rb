@@ -1,10 +1,10 @@
 class PayLegalisationPostJourney < BaseJourney
 
   def run()
-    @browser.goto 'gov.uk/performance'
+    @browser.goto 'www.gov.uk/performance'
     sleep 5
 
-    moveToEl(@browser.link(:text => 'Pay to get documents legalised by post'), { :click => true })
+    moveToEl(@browser.link(:text => 'Document legalisation payments'), { :click => true })
     sleep 10
     scrollToEl(@browser.element(:id => 'payments'))
     sleep 5
