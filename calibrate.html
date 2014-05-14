@@ -2,22 +2,42 @@
 <head>
   <title>Showtime calibration</title>
   <style type="text/css">
-  body {
-    font-family: sans-serif;
-  }
+    body {
+      background: #eee;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1.4em;
+      margin-top: 2em;
+      text-align: center;
+    }
+    #intro.calibrating {
+      color: #aaa;
+    }
+    #calibrating {
+      display: none;
+    }
   </style>
 </head>
 <body>
 
-Showtime! Click into window to begin.
+<h1>Showtime!</h1>
+
+<p>
+  Showtime is a project by the Government Digital Service to show a journey
+  through a website.
+</p>
+
+<p id="intro">Click in this browser window to begin.</p>
+
+<p id="calibrating">Calibrating...</p>
 
 <script>
-document.onclick = function(e){
-  document.write('Go!');
-  window.activated = true;
-  window.cursorX = e.pageX;
-  window.cursorY = e.pageY;
-}
+  document.onclick = function(e) {
+    document.getElementById('intro').className = 'calibrating';
+    document.getElementById('calibrating').style.display = 'block';
+    window.activated = true;
+    window.cursorX = e.pageX;
+    window.cursorY = e.pageY;
+  };
 </script>
 
 </body>
