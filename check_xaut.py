@@ -1,6 +1,7 @@
 import sys
+
 try:
-  import xaut
-  sys.exit(0)
+    import xaut
+    sys.exit(0)
 except ImportError:
-  sys.exit(1)
+    sys.exit(1)
