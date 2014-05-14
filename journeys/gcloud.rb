@@ -1,6 +1,6 @@
 class GCloudJourney < BaseJourney
 
-  def run()
+  def run
     @browser.goto 'www.gov.uk/performance'
     sleep 5
 

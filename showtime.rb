@@ -8,7 +8,8 @@ opts = Trollop::options do
   opt :browser, "Browser type", :type => :string, :default => 'chrome'
 end
 
-# check if osxautomation or xaut is installed
+# Check if either osxautomation or xaut is installed
+
 osxautomation_installed = false
 begin
   `osxautomation`
@@ -17,6 +18,9 @@ rescue
 end
 `python check_xaut.py`
 xaut_installed = $?.success?
+
+# Set up the correct automator based on which automation software
+# is installed. Prefer osxautomation over xaut if there's a choice.
 
 Dir["./automators/*.rb"].each {|file| require file }
 if osxautomation_installed
@@ -49,7 +53,7 @@ if opts[:size]
   end
 end
 
-# calibrate
+# Calibrate
 
 url = "file://#{File.expand_path(File.dirname(__FILE__))}/calibrate.html"
 @browser.goto url
@@ -103,12 +107,11 @@ posGlobal = @automator.mouse_location
 
 Dir["./journeys/*.rb"].each {|file| require file }
 journeys = [
-  LicensingJourney.new(@browser, @automator, @offsets),
-  PayLegalisationPostJourney.new(@browser, @automator, @offsets),
   VehicleLicensingJourney.new(@browser, @automator, @offsets),
-  HousingJourney.new(@browser, @automator, @offsets),
+  KPIDashboardJourney.new(@browser, @automator, @offsets),
+  GOVUKJourney.new(@browser, @automator, @offsets),
   GCloudJourney.new(@browser, @automator, @offsets),
-  GovUKJourney.new(@browser, @automator, @offsets),
+  LicensingJourney.new(@browser, @automator, @offsets),
 ]
 
 
@@ -122,5 +125,3 @@ begin
 ensure
   @browser.quit
 end
-
-

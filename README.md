@@ -24,14 +24,14 @@ sudo cp build/Release/osxautomation /usr/local/bin
 ```
 
  - `bundle install`
- 
+
 ### Ubuntu
 
  - Install Chromium, easiest from the Ubuntu Software Center
  - Ensure rubygems is up-to-date: `sudo apt-get install rubygems`
  - `bundle install`
  - [Download xaut](http://sourceforge.net/projects/xautomation/) and extract it:
-   
+
 ```sh
 cd <xaut_directory>
 ./configure

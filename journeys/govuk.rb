@@ -1,6 +1,6 @@
-class GovUKJourney < BaseJourney
+class GOVUKJourney < BaseJourney
 
-  def run()
+  def run
     @browser.goto 'www.gov.uk/performance/site-activity'
     sleep 4
 

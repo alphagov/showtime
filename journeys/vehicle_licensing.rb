@@ -1,13 +1,13 @@
 class VehicleLicensingJourney < BaseJourney
 
-  def run()
+  def run
     @browser.goto 'www.gov.uk/performance'
     sleep 5
 
     moveToEl(@browser.link(:text => 'Vehicle licensing'), { :click => true })
     sleep 8
 
-    moveToEl(@browser.link(:text => 'SORN'), { :click => true })
+    moveToEl(@browser.link(:text => 'Tax disc'), { :click => true })
     sleep 8
 
     scrollToEl(@browser.element(:id => 'recorded-errors'))

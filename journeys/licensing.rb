@@ -1,15 +1,15 @@
 class LicensingJourney < BaseJourney
 
-  def run()
+  def run
     @browser.goto 'www.gov.uk/performance'
     sleep 5
 
     moveToEl(@browser.link(:text => 'Licensing'), { :click => true })
-    sleep 10
+    sleep 8
 
     d = @browser.element(:class => "stack0")
     moveToEl(d, { :vertical => 0.5, :horizontal => 1.0 })
-    sleep 6
+    sleep 5
 
     moveToEl(@browser.link(:text => 'Monthly'), { :click => true })
     sleep 2
@@ -25,20 +25,20 @@ class LicensingJourney < BaseJourney
     moveToEl(d, { :vertical => 0.5, :horizontal =>  1.0 / 11.0 * 10.0 })
     sleep 2
     moveToEl(d, { :vertical => 0.5, :horizontal =>  1.0 })
-    sleep 6
+    sleep 4
 
     scrollToEl(@browser.element(:id => "applications-conversion-graph"))
-    sleep 10
+    sleep 8
 
     scrollToEl(@browser.element(:id => "top5-authorities-table"))
-    sleep 6
+    sleep 5
 
-    l = @browser.link :text => 'Westminster City Council'
+    l = @browser.link :text => 'Cornwall Council'
     moveToEl(l, { :click => true })
-    sleep 10
+    sleep 8
 
     scrollToEl(@browser.element(:id => "applications-table"))
-    sleep 10
+    sleep 8
 
     moveToEl(@browser.link(:id => 'proposition-name'), { :click => true })
   end
