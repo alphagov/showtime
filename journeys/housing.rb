@@ -1,7 +1,7 @@
 class HousingJourney < BaseJourney
 
   def run()
-    @browser.goto 'www.gov.uk/performance/housing'
+    @browser.goto "#{@domain}/performance/housing"
     sleep 4
 
     scrollToEl(@browser.element(:id => 'house-price-index'))

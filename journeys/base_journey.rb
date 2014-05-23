@@ -1,10 +1,11 @@
 class BaseJourney
 
-  def initialize (browser, automator, offset)
+  def initialize (browser, automator, offset, domain)
     @browser = browser
     @automator = automator
     @offsetX = offset[:x]
     @offsetY = offset[:y]
+    @domain = domain
   end
 
   def getScrollPos

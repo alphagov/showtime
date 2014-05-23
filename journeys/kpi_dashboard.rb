@@ -1,7 +1,7 @@
 class KPIDashboardJourney < BaseJourney
 
   def run
-    @browser.goto 'www.gov.uk/performance'
+    @browser.goto "#{@domain}/performance"
     sleep 4
 
     moveToEl(@browser.link(:text => 'View all services'), { :click => true })

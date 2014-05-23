@@ -6,7 +6,10 @@ opts = Trollop::options do
   opt :pos, "Browser window position <x,y>", :type => :string
   opt :size, "Browser window size <x,y>", :type => :string
   opt :browser, "Browser type", :type => :string, :default => 'chrome'
+  opt :domain, "Domain name to browse to", :type => :string, :default => 'www.gov.uk'
 end
+
+@domain = opts[:domain].to_s
 
 # Check if either osxautomation or xaut is installed
 
@@ -107,11 +110,11 @@ posGlobal = @automator.mouse_location
 
 Dir["./journeys/*.rb"].each {|file| require file }
 journeys = [
-  VehicleLicensingJourney.new(@browser, @automator, @offsets),
-  KPIDashboardJourney.new(@browser, @automator, @offsets),
-  GOVUKJourney.new(@browser, @automator, @offsets),
-  GCloudJourney.new(@browser, @automator, @offsets),
-  LicensingJourney.new(@browser, @automator, @offsets),
+  VehicleLicensingJourney.new(@browser, @automator, @offsets, @domain),
+  KPIDashboardJourney.new(@browser, @automator, @offsets, @domain),
+  GOVUKJourney.new(@browser, @automator, @offsets, @domain),
+  GCloudJourney.new(@browser, @automator, @offsets, @domain),
+  LicensingJourney.new(@browser, @automator, @offsets, @domain),
 ]
 
 
