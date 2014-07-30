@@ -1,7 +1,7 @@
 class GCloudJourney < BaseJourney
 
   def run
-    @browser.goto "#{@domain}/performance"
+    goToAndCheckJQuery "#{@domain}/performance"
     sleep 5
 
     moveToEl(@browser.link(:text => 'G-Cloud'), { :click => true })

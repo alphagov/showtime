@@ -8,6 +8,14 @@ class BaseJourney
     @domain = domain
   end
 
+  def goToAndCheckJQuery (url)
+    @browser.goto(url)
+
+    @browser.execute_script <<-JS
+      if(!(window.jQuery && window.jQuery.fn.jquery === '1.10.2')) {var s = document.createElement('script');s.setAttribute('src', 'https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js');s.setAttribute('type', 'text/javascript');document.getElementsByTagName('head')[0].appendChild(s);}
+    JS
+  end
+
   def getScrollPos
     res = @browser.execute_script <<-JS
       return {

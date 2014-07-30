@@ -1,7 +1,7 @@
 class KPIDashboardJourney < BaseJourney
 
   def run
-    @browser.goto "#{@domain}/performance"
+    goToAndCheckJQuery "#{@domain}/performance"
     sleep 4
 
     moveToEl(@browser.link(:text => 'View all services'), { :click => true })

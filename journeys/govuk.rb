@@ -1,7 +1,7 @@
 class GOVUKJourney < BaseJourney
 
   def run
-    @browser.goto "#{@domain}/performance/site-activity"
+    goToAndCheckJQuery "#{@domain}/performance/site-activity"
     sleep 4
 
     scrollToEl(@browser.element(:id => 'site-traffic'))
